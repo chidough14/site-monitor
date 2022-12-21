@@ -24,14 +24,8 @@ Route::get('/test', function () {
 
     $urls = Url::all();
     $urls->each(function ($url) {
-        //logger($url->url);
-        //dump($url->url);
 
         event(new CheckSite($url->url));
-
-        //dump($urlChecker->checkUrlStatus($url->url));
     });
-
-    //dd($urlChecker->checkUrlStatus($url));
 });
 
