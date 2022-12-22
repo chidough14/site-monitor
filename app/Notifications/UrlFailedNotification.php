@@ -8,6 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\URL as FacadesURL;
 
 class UrlFailedNotification extends Notification
 {
@@ -54,9 +55,16 @@ class UrlFailedNotification extends Notification
 
     public function toZulip($notifiable)
     {
+        $url = FacadesURL::temporarySignedRoute('re-activate', now()->addMinutes(30), ['url'=> $this->url->id]);
+
+        //dd($url);
+        $message = "SOS: The URL {$this->url->url} is not working. lease check soon. Click here to re-activate the monitoring {$url}";
+
+        logger($message);
+
         return [
             'url' => $this->url->url,
-            'message' => "SOS: The URL {$this->url->url} is not working. lease check soon"
+            'message' => $message
         ];
     }
 

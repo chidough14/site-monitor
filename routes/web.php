@@ -2,6 +2,7 @@
 
 use App\Events\CheckSite;
 use App\Models\Url;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/url/re-activate/{url}', function (Request $request, Url $url) {
+    if (!$request->hasValidSignature()) abort(401);
+    
+    $url->failing = false;
+
+    $url->save();
+
+    return redirect('/');
+ 
+})->name('re-activate');
 
 Route::get('/test', function () {
     
