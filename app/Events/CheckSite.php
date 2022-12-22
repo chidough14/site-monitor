@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Url;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -19,7 +20,7 @@ class CheckSite
      *
      * @return void
      */
-    public function __construct(public string $url)
+    public function __construct(public Url $url)
     {
        
     } 

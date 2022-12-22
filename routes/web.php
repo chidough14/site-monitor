@@ -25,7 +25,7 @@ Route::get('/test', function () {
     $urls = Url::all();
     $urls->each(function ($url) {
 
-        event(new CheckSite($url->url));
+        event(new CheckSite($url));
     });
 });
 

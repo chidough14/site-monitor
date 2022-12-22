@@ -31,4 +31,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'zulip' => [
+        'url' => env('ZULIP_URL'),
+        'user' => env('ZULIP_USER'),
+        'api_key' => env('ZULIP_API_KEY'),
+    ],
+
 ];

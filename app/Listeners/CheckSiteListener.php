@@ -27,7 +27,7 @@ class CheckSiteListener implements ShouldQueue
      */
     public function handle(CheckSite $event)
     {
-        logger($event->url);
+        logger($event->url->url);
 
         $this->urlChecker->checkUrlStatus($event->url);
     }

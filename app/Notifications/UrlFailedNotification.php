@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Broadcasting\ZulipChannel;
+use App\Models\Url;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -17,7 +18,7 @@ class UrlFailedNotification extends Notification
      *
      * @return void
      */
-    public function __construct(private string $url)
+    public function __construct(private Url $url)
     {
         //
     }
@@ -53,7 +54,10 @@ class UrlFailedNotification extends Notification
 
     public function toZulip($notifiable)
     {
-
+        return [
+            'url' => $this->url->url,
+            'message' => "SOS: The URL {$this->url->url} is not working. lease check soon"
+        ];
     }
 
     /**
