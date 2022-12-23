@@ -12,4 +12,14 @@ class Url extends Model
     protected $fillable = [
         'url'
     ];
+
+    protected $casts = [
+        'active' => 'boolean',
+        'failing' => 'boolean'
+    ];
+
+    public function scopeActive($query)
+    {
+        return $query->where('active', 1);
+    }
 }
